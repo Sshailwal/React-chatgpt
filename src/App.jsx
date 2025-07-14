@@ -1,12 +1,9 @@
 import { useState } from 'react'
-
 import './App.css'
 import { fetchGeminiResponse } from './openai';
 
 
 function App() {
-  
-  
 async function handleAskGemini() {
   const answer = await fetchGeminiResponse('Hello Gemini!');
   console.log(answer);
@@ -92,7 +89,7 @@ async function handleAskGemini() {
  </div>
       </div>
     </div>
-    <div className='footer bg-gray-800 text-white text-center py-4 w-full h-11 flex justify-center overflow-hidden'>
+    <div className='footer bg-gray-800 text-white text-center py-4 w-full h-11 flex justify-center overflow-hidden' value={input} onChange={(e) => setInput(e.target.value)} onClick={handleAskGemini}>
       <p>&copy; 2025 ChatGPT Clone. All rights reserved.</p>
   </div>
 </div>

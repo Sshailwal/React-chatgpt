@@ -1,25 +1,11 @@
-export async function fetchGeminiResponse(prompt) {
-  const apiKey = 'AIzaSyBX3rraNIALD_SOpyVPqHx2p1Udb-l0aTY'; // Replace with your Gemini API key
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + apiKey;
+import { GoogleGenAI } from "@google/genai";
 
-  const body = {
-    contents: [{ parts: [{ text: prompt }] }]
-  };
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY; // Vite env variable
+const ai = new GoogleGenAI({ apiKey });
 
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch Gemini response');
-  }
-
-  const data = await response.json();
+export async function fetchGeminiResponse(prompt) { 
+  const model = ai.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const result = await model.generateContent(prompt);
   // The response structure may vary; adjust as needed
-  return data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+  return result.response.text();
 }
-
