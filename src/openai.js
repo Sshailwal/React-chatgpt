@@ -1,11 +1,10 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY; // Vite env variable
-const ai = new GoogleGenAI({ apiKey });
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+const genAI = new GoogleGenerativeAI(apiKey);
 
-export async function fetchGeminiResponse(prompt) { 
-  const model = ai.getGenerativeModel({ model: "gemini-2.5-flash" });
-  const result = await model.generateContent(prompt);
-  // The response structure may vary; adjust as needed
-  return result.response.text();
+export async function fetchGeminiResponse(prompt) {
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro"});
+  const result = await model.generateContent({ contents: [{ parts: [{ text: prompt }] }] });
+  return result.response.candidates?.[0]?.content?.parts?.[0]?.text || "";
 }
