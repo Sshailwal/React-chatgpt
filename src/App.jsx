@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import './App.css'
-import { fetchGeminiResponse } from './openai'; 
+import { fetchOpenAIResponse } from './openai'; // <-- update import
 
 function App() {
 
@@ -24,22 +24,14 @@ const handleSend= async() => {
     setMessages([...messages, { text: input, isBot: false }]);
     setInput('');
     try {
-      const res = await fetchGeminiResponse(input);
+      const res = await fetchOpenAIResponse(input); // <-- use OpenAI
       setMessages(msgs => [...msgs, { text: res, isBot: true }]);
     } catch (err) {
       setMessages(msgs => [...msgs, { text: "Error: Could not get response.", isBot: true }]);
-      console.error("Gemini API error:", err);
+      console.error("OpenAI API error:", err);
     }
   }; 
-
-  async function handleAskGemini() {
-    try {
-      const res = await fetchGeminiResponse(input);
-      console.log(res);
-    } catch (err) {
-      console.error("Gemini API error:", err);
-    }
-  }
+  
 
   return (
     <>
@@ -58,16 +50,22 @@ const handleSend= async() => {
               </div>
               <div className="flex flex-col gap-4 pb-4">
                 <div className='border border-gray-600 p-3 flex items-center justify-center mr-3'>  
-                  <button className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-gray-400 rounded"></div>
-                    <h3 className="text-white">What is programming?</h3>
-                  </button>
+                  <button
+  className="flex items-center gap-2"
+  onClick={() => setInput("What is programming?")}
+>
+  <div className="w-4 h-4 bg-gray-400 rounded"></div>
+  <h3 className="text-white">What is programming?</h3>
+</button>
                 </div>
                 <div className='border border-gray-600 p-3 flex items-center justify-center mr-3'>  
-                  <button className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-gray-400 rounded"></div>
-                    <h3 className="text-white">What is AI?</h3>
-                  </button>
+                  <button
+  className="flex items-center gap-2"
+  onClick={() => setInput("What is AI?")}
+>
+  <div className="w-4 h-4 bg-gray-400 rounded"></div>
+  <h3 className="text-white">What is AI?</h3>
+</button>
                 </div>
               </div>
             </div>
@@ -89,7 +87,8 @@ const handleSend= async() => {
           </div>
           
           <div className='right_sidebar flex-1 justify-around items-center flex flex-col gap-4'>
-            <div className='header w-full text-white flex flex-col items-center justify-between px-4'>
+            <div className='messages-container w-full text-white flex flex-col items-center px-4 overflow-y-auto h-[70vh]'>
+
                {/* <div className="question w-3/6 bg-slate-900 rounded-lg p-3 flex gap-3">
                 <img src="src/assets/user-icon.png" alt="user_icon" className="h-10 w-10"/>
                 <p className='text-white'>
@@ -119,6 +118,7 @@ const handleSend= async() => {
                   placeholder="Type your message here..."
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleEnter}
                 ></textarea>
                 <button className="h-10 w-10 flex items-center justify-center" onClick={handleSend}>
                   <div className="w-6 h-6 rounded" >
