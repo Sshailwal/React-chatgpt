@@ -39,8 +39,8 @@ function App() {
         <div className='flex flex-1 flex-col md:flex-row'>
 
           {/* Left Sidebar */}
-          <div className="leftsidebar w-full md:w-1/5 border-r border-gray-600">
-            <div className='upperleftsidebar flex flex-col gap-6 items-center py-6'>
+          <div className="leftsidebar w-full md:w-1/5 border-r border-gray-600 justify-around flex flex-col items-center  text-white"> 
+            <div className='upperleftsidebar flex flex-col gap-6 items-center py-6 '>
               <div className='logo flex items-center gap-2'>
                 <img src="src/assets/chatgpt.svg" alt="chat_gpt logo" />
                 <h1 className='text-white text-xl md:text-2xl font-bold'>ChatGPT</h1>
@@ -66,7 +66,7 @@ function App() {
               </div>
             </div>
 
-            <div className="lowersidebar border-t border-gray-600 py-4 flex flex-col gap-4 items-center">
+            <div className="lowersidebar border-t w-full border-gray-600 py-4 flex flex-col gap-4 items-center justify-evenly">
               <button className='home_button flex gap-3 items-center'>
                 <img src="src/assets/home.svg" alt="home_button" className="w-5 h-5" />
                 <h3 className='text-white text-sm'>Home</h3>
