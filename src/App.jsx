@@ -42,7 +42,7 @@ function App() {
           <div className="leftsidebar w-full md:w-1/5 border-r border-gray-600 justify-around flex flex-col items-center  text-white"> 
             <div className='upperleftsidebar flex flex-col gap-6 items-center py-6 '>
               <div className='logo flex items-center gap-2'>
-                <img src="src/assets/chatgpt.svg" alt="chat_gpt logo" />
+                <img src="/assets/chatgpt.svg" alt="chat_gpt logo" />
                 <h1 className='text-white text-xl md:text-2xl font-bold'>ChatGPT</h1>
               </div>
               <div className='new_chat_button bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300'>
@@ -68,11 +68,11 @@ function App() {
 
             <div className="lowersidebar border-t w-full border-gray-600 py-4 flex flex-col gap-4 items-center justify-evenly">
               <button className='home_button flex gap-3 items-center'>
-                <img src="src/assets/home.svg" alt="home_button" className="w-5 h-5" />
+                <img src="/assets/home.svg" alt="home_button" className="w-5 h-5" />
                 <h3 className='text-white text-sm'>Home</h3>
               </button>
               <button className='rocket_button flex gap-3 items-center'>
-                <img src="src/assets/rocket.svg" alt="rocket_button" className="w-5 h-5" />
+                <img src="/assets/rocket.svg" alt="rocket_button" className="w-5 h-5" />
                 <h3 className='text-white text-sm'>Rocket</h3>
               </button>
             </div>
@@ -83,7 +83,7 @@ function App() {
             <div className='messages-container w-full max-w-3xl text-white flex flex-col gap-4 overflow-y-auto h-[65vh]'>
               {messages.map((message, index) =>
                 <div className={`${message.isBot ? "bg-blue-700" : "bg-slate-900"} w-full rounded-lg p-3 flex gap-3`} key={index}>
-                  <img src={message.isBot ? "src/assets/chatgptLogo.svg" : "src/assets/user-icon.png"} alt="chatgptLogo" className="h-10 w-10" />
+                  <img src={message.isBot ? "/assets/chatgptLogo.svg" : "/assets/user-icon.png"} alt="chatgptLogo" className="h-10 w-10" />
                   <p className='text-white'>{message.text}</p>
                 </div>
               )}
@@ -101,7 +101,7 @@ function App() {
                   onKeyDown={handleEnter}
                 ></textarea>
                 <button className="h-10 w-10 flex items-center justify-center" onClick={handleSend}>
-                  <img src="src/assets/send.svg" alt="send_image" className="w-6 h-6" />
+                  <img src="/assets/send.svg" alt="send_image" className="w-6 h-6" />
                 </button>
               </div>
             </div>
